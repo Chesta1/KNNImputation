@@ -1,0 +1,32 @@
+---
+title: "KNNForMissingValues"
+output: html_document
+---
+
+## The data is wns_inno data available on kaggle which is the data whether the person gets the promotion or not.
+## Data has contained some missing values in the education column and in the previous_year_rating one. Earlier I have shared the code for the same to fill the missing values using the "mice" package as the mice package used the "Multivariate Imputation by Chained Equations"
+## Using the KNN which is the K Nearest Neighbor Algorithm to fill the missing values.
+
+## Loading the data and observing the structure of the data
+
+```{r}
+HRTrain_Data <- read.csv(file = "HRTrainData.csv", sep = ",", na.strings = "")
+str(HRTrain_Data)
+```
+# Summary of the data
+
+```{r}
+summary(HRTrain_Data)
+```
+# using the package vlm to do the imputation of the missing data using KNN
+
+```{r}
+KnnImputation1 <- kNN(HRTrain_Data, variable = c("previous_year_rating","education"), k = 5)
+```
+# Summary of the data after imputation
+
+```{r}
+summary(KnnImputation1)
+```
+# Na value has been replaced with the predicted ones using the K nearest neighbor algoritm
+
